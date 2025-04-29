@@ -1,17 +1,19 @@
+import LoadModeProvider from "./providers/LoadModeProvider"
+import NavBar from "./components/NavBar"
+import { Outlet } from "react-router-dom"
 
-
-import './App.css'
 
 function App() {
- 
 
   return (
     <>
       <header>
-          {/* <img src={viteLogo} className="logo" alt="Vite logo" /> */}
+    <NavBar />
           </header>
       <main>
-
+      <LoadModeProvider>
+        <Outlet />
+      </LoadModeProvider>
       </main>
     </>
   )
