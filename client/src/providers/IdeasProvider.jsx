@@ -1,23 +1,31 @@
+import { useState, useEffect, useContext } from "react"
 import IdeasContext from "../contexts/IdeasContext"
+import LoadModeContext from "../contexts/LoadModeContext"
 
 function IdeasProvider({ children }) {
- const [ ideas, setIdeas ] = useState([])
+ const { setIsLoading } = useContext(LoadModeContext)
+ 
+  const [ ideas, setIdeas ] = useState([])
 
-    useEffect(() => {
-        fetchIdeas()
-    },[])
-
+  useEffect(() => {
     async function fetchIdeas() {
-        try {
-          const r = await fetch(`http://localhost:3000/ideas`)
-          if(!r.ok) {
-            throw new Error("💥 Error");
-          }
-          const data = await r.json()
-          setIdeas(data)
-        }catch (error) {console.error("❌ Caught error:", error);}  
+      try {
+        setIsLoading(true) 
+        const r = await fetch(`http://localhost:3000/ideas`)
+        if (!r.ok) throw new Error("💥 Error")
+        const data = await r.json()
+        setIdeas(data)
+        setIsLoading(false) 
+      } catch (error) {
+        console.error("❌ Caught error:", error)
+        setIsLoading(false) 
+      }
     }
+  
+    fetchIdeas()
+  }, [])
 
+    
 
 return (
 <>

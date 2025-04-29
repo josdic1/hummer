@@ -1,9 +1,11 @@
 import { useState, useEffect, useContext } from "react"
+import { useNavigate } from "react-router-dom"
 import LoadModeContext from "../contexts/LoadModeContext"
+import IdeasContext from "../contexts/IdeasContext"
 import IdeaCard from "../components/IdeaCard"
 
 function IdeaList() {
-    const { ideas } = useContext(LoadModeContext)
+    const { ideas } = useContext(IdeasContext)
 
     const [ displayList, setDisplayList ] = useState(ideas)
 
@@ -11,9 +13,18 @@ function IdeaList() {
         setDisplayList(ideas || [])
     },[ideas])
 
+    const navigate = useNavigate()
+
+    const onButtonAction = (click) => {
+        navigate(`idea/${click}`)
+    }
+
+
     const ideasList = displayList.map(idea => (
-         <IdeaCard key={idea.id} idea={idea} />
+         <IdeaCard key={idea.id} idea={idea} onButtonAction={onButtonAction}/>
     ))
+
+
 
 
 return (
@@ -25,7 +36,7 @@ return (
                 <th> Tempo </th>
                 <th> Status </th>
                 <th> Updated </th>
-                <th> Lyrics </th>
+                <th> View </th>
                 <th> Listen </th>
                 <th> Actions </th>
             </tr>

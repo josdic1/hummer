@@ -92,9 +92,9 @@ h1 {
 }
 
 .logo-spinner {
-  width: 64px;
-  height: 64px;
-  animation: spin 1.2s linear infinite;
+  width: 250px;
+  height: 250px;
+  animation: spin 2.7s linear infinite;
   margin: 4rem auto;
   display: block;
 }
