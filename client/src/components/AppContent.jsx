@@ -6,13 +6,13 @@ import LoadModeContext from "../contexts/LoadModeContext"
 import DashBoard from "../pages/Dashboard"
 
 function AppContent() {
-    const { isLoading } = useContext(LoadModeContext)
+    const { isLoading,inEditMode } = useContext(LoadModeContext)
 
   return (
     <>
-
+  {inEditMode ? "EDIT" : ""}
   <img src={hummerLogo} className='logo'/>
-
+    
 {isLoading ? <Loader /> : <DashBoard /> }
 
     </>

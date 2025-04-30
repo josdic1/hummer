@@ -6,7 +6,8 @@ return (
 <>
 <nav>
 <NavLink to='/'> Home </NavLink>
-<NavLink to='error'> Cancel </NavLink>
+
+<NavLink to='loader'> ↻ </NavLink>
 </nav>
 </>
 )}

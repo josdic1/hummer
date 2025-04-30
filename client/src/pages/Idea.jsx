@@ -31,6 +31,12 @@ function Idea() {
     return (
     <>
     <p>{viewedIdea.title}</p>
+    <p>{viewedIdea.bpm}</p>
+    <p>{viewedIdea.status}</p>
+    <p>{viewedIdea.lyrics}</p>
+    <a href={viewedIdea.link}>Listen</a>
+    <p>Created {viewedIdea?.created_on || "n/a"}</p>
+    <p>Updated {viewedIdea?.modified_on || "n/a"}</p>
     </>
     )}
 

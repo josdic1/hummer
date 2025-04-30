@@ -2,11 +2,12 @@ import NavBar from "./components/NavBar"
 import LoadModeProvider from "./providers/LoadModeProvider"
 import IdeasProvider from "./providers/IdeasProvider"
 import { Outlet } from "react-router-dom"
-
+import { Toaster } from "react-hot-toast"
 
 function App() {
   return (
     <>
+       <Toaster position="top-center" reverseOrder={false} />
     <header>
 <NavBar />
     </header>
@@ -14,6 +15,7 @@ function App() {
         <LoadModeProvider>
           <IdeasProvider>
           <Outlet />
+      
           </IdeasProvider>
         </LoadModeProvider>
         </main>

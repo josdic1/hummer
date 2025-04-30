@@ -7,11 +7,8 @@ const onAction = (e) => {
    const { name, value, type } = e.currentTarget 
     type === 'select-one' ? click = value : 
     click = name
-    switch(click) {
-        case 'view':
-            onButtonAction(idea.id)
-    }
-    }
+    onButtonAction(click, idea)
+}
 
 
     return (
@@ -25,12 +22,19 @@ const onAction = (e) => {
             <td><button type='button' name='listen'
             onClick={onAction}> 🔈 </button></td>
             <td>
-                <select name='actions' onChange={onAction} value="">
-                <option value="" disabled> Actions </option>
-                <option value="edit"> Edit </option>
-                <option  value="delete"> Delete </option>
-                <option value="archive"> Archive </option>
-            </select>
+            <select
+      name="actions"
+      value=""
+      onChange={(e) => {
+        onAction(e, idea);
+        e.target.value = ""; 
+      }}
+    >
+  <option value="" disabled>Actions</option>
+  <option value="edit">Edit</option>
+  <option value="delete">Delete</option>
+  <option value="archive">Archive</option>
+</select>
             </td>
             </tr>
         </>
