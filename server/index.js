@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import { PrismaClient } from '@prisma/client'
+import uploadRouter from './routes/upload.js'
 
 const app = express()
 const prisma = new PrismaClient()
@@ -61,7 +62,12 @@ app.delete('/ideas/:id', async (req, res) => {
   res.json({ message: 'Deleted' })
 })
 
+// Serve uploaded audio & mount upload route
+app.use('/audio', express.static('public/audio'))
+app.use(uploadRouter)
+
 // Start server
 app.listen(3000, () => {
   console.log('🔥 Server running at http://localhost:3000')
 })
+

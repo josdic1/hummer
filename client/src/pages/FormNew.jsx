@@ -19,12 +19,13 @@ function FormNew() {
         const [selectedFile, setSelectedFile] = useState(null)
 
         const onFileChange = (e) => {
-          const file = e.target.files[0]
-          if (file) {
-            setSelectedFile(file)
+            const file = e.target.files[0]
+            if (file) {
+              setSelectedFile(file)
+            }
           }
-        }
-        
+    
+
         const onClear = () => {
             setFormData({
                 title: '',
@@ -69,6 +70,11 @@ function FormNew() {
 return (
 <>
 <Form buttonText={"Add Idea"} onClick={onClick} onChange={handleChange} onSubmit={onSubmit} formData={formData} onFileChange={onFileChange}/>
+{selectedFile && (
+    <audio controls className="audio-player">
+      <source src={URL.createObjectURL(selectedFile)} type={selectedFile.type} />
+    </audio>
+  )}
 </>
 )}
 

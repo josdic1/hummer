@@ -25,11 +25,7 @@ function FormEdit() {
             setSelectedFile(file)
           }
         }
-        {selectedFile && (
-            <audio controls className="audio-player">
-              <source src={URL.createObjectURL(selectedFile)} type={selectedFile.type} />
-            </audio>
-          )}
+
      const navigate = useNavigate()
 
      useEffect(() => {
@@ -84,6 +80,11 @@ function FormEdit() {
 return (
 <>
 <Form buttonText={"Update Idea"} onClick={onClick} onChange={handleChange} onSubmit={onSubmit} formData={formData} onFileChange={onFileChange}/>
+{selectedFile && (
+            <audio controls className="audio-player">
+              <source src={URL.createObjectURL(selectedFile)} type={selectedFile.type} />
+            </audio>
+          )}
 </>
 )}
 
