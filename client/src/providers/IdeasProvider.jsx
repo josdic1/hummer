@@ -6,7 +6,7 @@ function IdeasProvider({ children }) {
  const { setIsLoading } = useContext(LoadModeContext)
  
   const [ ideas, setIdeas ] = useState([])
-  const [ selectedIdea, setSelectedIdea ] = useState(null)
+
 
   useEffect(() => {
     async function fetchIdeas() {
@@ -74,7 +74,7 @@ function IdeasProvider({ children }) {
 return (
 <>
 <IdeasContext.Provider
-value={{ ideas, selectedIdea, setSelectedIdea, handleCreate, handleUpdate, handleDelete }}>
+value={{ ideas, handleCreate, handleUpdate, handleDelete }}>
     { children }
 </IdeasContext.Provider>
 </>
