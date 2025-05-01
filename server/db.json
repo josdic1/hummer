@@ -7,7 +7,8 @@
       "status": "draft",
       "created_on": "2025-04-29",
       "modified_on": "2025-04-29",
-      "link": "https://drive.google.com/file/d/1pQ_COAfn0KbCJhlLZfEejUpyqgdgid3s/view?usp=drive_link"
+      "link": "https://drive.google.com/file/d/1pQ_COAfn0KbCJhlLZfEejUpyqgdgid3s/view?usp=drive_link",
+      "favorite": false
     },
     {
       "bpm": "128",
@@ -16,7 +17,8 @@
       "status": "draft",
       "created_on": "2025-04-2",
       "modified_on": "2025-04-2",
-      "link": "https://drive.google.com/file/d/1pQ_COAfn0KbCJhlLZfEejUpyqgdgid3s/view?usp=drive_link"
+      "link": "https://drive.google.com/file/d/1pQ_COAfn0KbCJhlLZfEejUpyqgdgid3s/view?usp=drive_link",
+      "favorite": false
     }
   ]
 }

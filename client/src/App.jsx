@@ -1,3 +1,4 @@
+import React from 'react'
 import NavBar from "./components/NavBar"
 import LoadModeProvider from "./providers/LoadModeProvider"
 import IdeasProvider from "./providers/IdeasProvider"
@@ -14,8 +15,9 @@ function App() {
     <main>
         <LoadModeProvider>
           <IdeasProvider>
+   
           <Outlet />
-      
+        
           </IdeasProvider>
         </LoadModeProvider>
         </main>

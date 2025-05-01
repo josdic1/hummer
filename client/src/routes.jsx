@@ -1,3 +1,4 @@
+import React from 'react'
 import App from "./App"
 import AppContent from "./components/AppContent"
 import Error from "./pages/Error"

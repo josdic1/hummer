@@ -1,3 +1,4 @@
+import React from 'react'
 import hummerLogo from '../assets/hummerLogo.svg'
 
 

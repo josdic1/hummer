@@ -1,3 +1,4 @@
+import React from 'react'
 import { useContext } from "react"
 import LoadModeContext from "../contexts/LoadModeContext"
 import hummerLogo from "../assets/hummerLogo.svg"
@@ -12,7 +13,7 @@ function AppContent() {
   return (
     <>
 
-  <img src={hummerLogo} className='logo'/>
+  <img src={hummerLogo} className='logo-header'/>
     
 {isLoading ? <Loader /> : <DashBoard /> }
 

@@ -1,13 +1,16 @@
-import { NavLink } from "react-router-dom"
+
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 function NavBar() {
-
+   
 return (
 <>
 <nav>
-<NavLink to='/'> Home </NavLink>
-<NavLink to='new'> New </NavLink>
-<NavLink to='loader'> ↻ </NavLink>
+<NavLink className="nav-link" to='/'> Home </NavLink>
+<NavLink className="nav-link" to='new'> New </NavLink>
+<NavLink className="nav-link" to='loader'> ↻ </NavLink>
+
 </nav>
 </>
 )}

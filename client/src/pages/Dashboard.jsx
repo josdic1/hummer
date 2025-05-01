@@ -1,3 +1,4 @@
+import React from 'react'
 import IdeaList from "./IdeaList"
 
 function DashBoard() {

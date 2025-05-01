@@ -13,7 +13,8 @@ model Idea {
   bpm         String
   lyrics      String
   status      String
-  created_on  DateTime
-  modified_on DateTime
+  created_on  DateTime @default(now())
+  modified_on DateTime @updatedAt
   link        String
+  favorite Boolean @default(false)
 }

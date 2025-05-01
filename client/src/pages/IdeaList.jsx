@@ -1,3 +1,4 @@
+import React from 'react'
 import { useState, useEffect, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import IdeasContext from "../contexts/IdeasContext"
@@ -6,25 +7,30 @@ import Filter from "./Filter"
 import { toast } from "react-hot-toast"
 
 function IdeaList() {
-    const { ideas, handleDelete } = useContext(IdeasContext)
+    const { ideas, handleDelete, handleFavorite, isFavorite, fetchIdeas} = useContext(IdeasContext)
 
-    const [displayList, setDisplayList] = useState(ideas)
+
     const [ filterValues, setFilterValues] = useState({
         lyrics: "",
         bpm: "",
-        status: "all"
+        status: "all",
+        favorite: false
     })
+    const [showArchived, setShowArchived] = useState(false)
 
-    useEffect(() => {
-        if (ideas?.length > 0) {
-            setDisplayList(ideas)
-        }
-    }, [ideas])
+
+
+
 
     const navigate = useNavigate()
 
+
+
     const handleClick = (click, idea) => {
         switch (click) {
+            case 'favorite':
+                handleFavorite(idea)
+                break;
             case 'view':
                 navigate(`idea/${idea.id}`)
                 break;
@@ -49,32 +55,46 @@ function IdeaList() {
         }
     }
 
-    const handleFilter = () => {
-       const filtered = ideas.reduce((acc, idea) => {
+
+    const filteredIdeas = ideas.filter(idea => {
         const matches = {
-            lyrics: filterValues.lyrics === "" || idea.lyrics.toLowerCase().includes(filterValues.lyrics.toLowerCase()),
-
-            bpm: filterValues.bpm === "" || idea.bpm.includes(filterValues.bpm),
-
-            status: filterValues.status === "all" || idea.status.toLowerCase() === filterValues.status.toLowerCase()
+          lyrics: filterValues.lyrics === "" || idea.lyrics.toLowerCase().includes(filterValues.lyrics.toLowerCase()),
+          bpm: filterValues.bpm === "" || idea.bpm.includes(filterValues.bpm),
+          status: filterValues.status === "all" || idea.status === filterValues.status,
+          favorite: !filterValues.favorite || idea.favorite,
+          archived: showArchived || idea.status !== "archived"
         }
+        return Object.values(matches).every(Boolean)
+      })
 
-        return Object.values(matches).every(Boolean) ? [...acc, idea] : acc
-       },[])
-       setDisplayList(filtered)
+    const handleClearFilter = () => {
+        setFilterValues({
+            lyrics: "",
+            bpm: "",
+            status: "all",
+            favorite: false
+        })
     }
 
-
-    const ideasList = displayList.map(idea => (
-        <IdeaCard key={idea.id} idea={idea} onClick={handleClick} />
-    ))
+    const ideasList = filteredIdeas.map(idea => (
+        <IdeaCard key={idea.id} idea={idea} onClick={handleClick} isFavorite={isFavorite} />
+      ))
 
     return (
         <>
-        <Filter filterValues={filterValues} setFilterValues={setFilterValues} onFilter={handleFilter} />
+        <Filter
+  filterValues={filterValues}
+  setFilterValues={setFilterValues}
+  onClearFilter={handleClearFilter}
+/>
+
+<button className="form__button form__button--toggle" onClick={() => setShowArchived(prev => !prev)}>
+  {showArchived ? "Hide Archived" : "Show Archived"}
+</button>
             <table>
                 <thead>
                     <tr>
+                        <th> ★ </th>
                         <th> Title </th>
                         <th> Tempo </th>
                         <th> Status </th>

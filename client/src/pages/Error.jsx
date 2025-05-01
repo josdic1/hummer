@@ -1,3 +1,4 @@
+import React from 'react'
 import { useRouteError } from "react-router-dom"
 import NavBar from "../components/NavBar"
 
@@ -9,11 +10,11 @@ return (
 <header>
 <NavBar />
 </header>
-<main>
+<main className='error-page'>
    
-<p>{error?.status || ''} [status]</p>
-<p>{error?.statusText || ''} [statusText]</p>
-<p><b> {error?.message|| ''}</b> [message]</p>
+<p className='error-text'>{error?.status || ''} [status]</p>
+<p className='error-text'>{error?.statusText || ''} [statusText]</p>
+<p className='error-text'>{error?.message|| ''} [message]</p>
 </main>
 </>
 )}

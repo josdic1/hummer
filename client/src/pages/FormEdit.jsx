@@ -1,11 +1,11 @@
-
+import React from 'react'
 import { useState, useEffect, useContext } from "react"
 import IdeasContext from "../contexts/IdeasContext"
 import Form from "../components/Form"
 import { useNavigate, useParams } from "react-router-dom"
 
 function FormEdit() {
-    const {ideas } = useContext(IdeasContext)
+    const {ideas, handleUpdate } = useContext(IdeasContext)
 
     const { id } = useParams()
 
@@ -17,7 +17,19 @@ function FormEdit() {
          lyrics: '',
          link: ''
      })
+      const [selectedFile, setSelectedFile] = useState(null)
 
+        const onFileChange = (e) => {
+          const file = e.target.files[0]
+          if (file) {
+            setSelectedFile(file)
+          }
+        }
+        {selectedFile && (
+            <audio controls className="audio-player">
+              <source src={URL.createObjectURL(selectedFile)} type={selectedFile.type} />
+            </audio>
+          )}
      const navigate = useNavigate()
 
      useEffect(() => {
@@ -25,42 +37,53 @@ function FormEdit() {
         setFormData(found)
      },[id, ideas])
 
-     const handleChange = (e) => {
-
-     }
-
      const onClear = () => {
-        setFormData({
-        id: '',
-       title: '',
-        bpm: '',
-        status: '',
-        lyrics: '',
-        link: ''
-    })
-    }
+      setFormData({
+      id: '',
+      title: '',
+      bpm: '',
+      status: '',
+      lyrics: '',
+      link: ''
+      })
+  }
 
-     const onSubmit = (e) => {
-         e.preventDefault()
+  const onCancel = () => {
+      onClear()
+      navigate('/')
+  }
 
-     }
+  const handleChange = (e) => {
+      const { id, value} = e.currentTarget  
+      setFormData(prev => ({
+          ...prev,
+          [id]: value,
+      })) 
+  }
 
-     const onClick = (e) => {
-        const { name } = e.currentTarget
-        if(name === "cancel") {
-        navigate('/')
-        onClear()
-     }
+  const onClick = (e) => {
+      const { name } = e.currentTarget
+      if(name === 'clear') {
+          onClear()
+      } else {
+      if(name === 'cancel') {
+          onCancel()
+      }
+      }
+  }
 
-     if(name === "clear") {
-        onClear()
-     }}
+  const onSubmit = (e) => {
+      e.preventDefault()
+      const updatedIdea = formData
+      handleUpdate(updatedIdea)
+      onCancel()
+  }
 
 
 
 return (
 <>
-<Form buttonText={"Update Idea"} onClick={onClick} onChange={handleChange} onSubmit={onSubmit} formData={formData}/>
+<Form buttonText={"Update Idea"} onClick={onClick} onChange={handleChange} onSubmit={onSubmit} formData={formData} onFileChange={onFileChange}/>
 </>
 )}
 
